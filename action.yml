@@ -28,6 +28,7 @@ runs:
 
     - name: Build
       run: hugo --gc --minify
+      shell: bash
 
     # see https://github.com/peaceiris/actions-gh-pages
     - name: Deploy
