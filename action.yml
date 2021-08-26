@@ -1,0 +1,38 @@
+name: Publish a Hugo site
+description: Builds a Hugo website and deploys it into the gh-pages branch.
+
+inputs:
+  ci_access_token:
+    description: "Token for accessing the theme components private repository"
+    required: true
+  deploy_key:
+    description: "SSH deploy key"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    # see https://github.com/actions/checkout
+    - name: Checkout sources
+      uses: actions/checkout@v2
+      with:
+        token: ${{ inputs.ci_access_token }}
+        submodules: true
+
+    # see https://github.com/peaceiris/actions-hugo
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
+        extended: true
+
+    - name: Build
+      run: hugo --gc --minify
+
+    # see https://github.com/peaceiris/actions-gh-pages
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ inputs.deploy_key }}
+        publish_branch: gh-pages
+        publish_dir: ./public
