@@ -2,7 +2,7 @@ name: Publish a Hugo site
 description: Builds a Hugo website and deploys it into the gh-pages branch.
 
 inputs:
-  ci_access_token:
+  access_token:
     description: "Token for accessing the theme components private repository"
     required: true
   deploy_key:
@@ -16,7 +16,7 @@ runs:
     - name: Checkout sources
       uses: actions/checkout@v2
       with:
-        token: ${{ inputs.ci_access_token }}
+        token: ${{ inputs.access_token }}
         submodules: true
 
     # see https://github.com/peaceiris/actions-hugo
