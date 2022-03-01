@@ -14,7 +14,7 @@ runs:
   steps:
     # see https://github.com/actions/checkout
     - name: Checkout sources
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         token: ${{ inputs.access_token }}
         submodules: true
