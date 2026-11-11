@@ -26,6 +26,16 @@ runs:
         hugo-version: 'latest'
         extended: true
 
+    # see https://gohugo.io/functions/css/sass/#dart-sass
+    - name: Setup Dart Sass
+      shell: bash
+      env:
+        # renovate: datasource=github-releases depName=sass/dart-sass
+        DART_SASS_VERSION: 1.108.2
+      run: |
+        curl -fsSL "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" | tar -xz -C "${RUNNER_TEMP}"
+        echo "${RUNNER_TEMP}/dart-sass" >> "${GITHUB_PATH}"
+
     - name: Build
       run: hugo --gc --minify
       shell: bash
