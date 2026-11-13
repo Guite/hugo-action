@@ -23,8 +23,8 @@ runs:
     - name: Setup Hugo
       uses: peaceiris/actions-hugo@v3
       with:
-        hugo-version: 'latest'
-        extended: true
+        # renovate: datasource=github-releases depName=gohugoio/hugo extractVersion=^v(?<version>.+)$
+        hugo-version: '0.170.0'
 
     # see https://gohugo.io/functions/css/sass/#dart-sass
     - name: Setup Dart Sass

@@ -10,7 +10,7 @@
         "/^action\\.yml$/"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\s+\\w+: '?(?<currentValue>[^\\s']+)'?"
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\s+[\\w-]+: '?(?<currentValue>[^\\s']+)'?"
       ]
     }
   ]
