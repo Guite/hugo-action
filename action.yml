@@ -1,13 +1,15 @@
 name: Publish a Hugo site
-description: Builds a Hugo website and deploys it into the gh-pages branch.
+description: Builds a Hugo website and deploys it to GitHub Pages (official Pages deployment).
 
 inputs:
   access_token:
     description: "Token for accessing the theme components private repository"
     required: true
-  deploy_key:
-    description: "SSH deploy key"
-    required: true
+
+outputs:
+  page_url:
+    description: "URL of the deployed Pages site"
+    value: ${{ steps.deployment.outputs.page_url }}
 
 runs:
   using: composite
@@ -40,10 +42,15 @@ runs:
       run: hugo --gc --minify
       shell: bash
 
-    # see https://github.com/peaceiris/actions-gh-pages
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v4
+    # see https://github.com/actions/upload-pages-artifact
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v5
       with:
-        deploy_key: ${{ inputs.deploy_key }}
-        publish_branch: gh-pages
-        publish_dir: ./public
+        path: ./public
+        # e.g. .well-known/ (WKD on guite.de)
+        include-hidden-files: true
+
+    # see https://github.com/actions/deploy-pages
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v5
