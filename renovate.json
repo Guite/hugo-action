@@ -13,5 +13,17 @@
         "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)(?: extractVersion=(?<extractVersion>\\S+))?\\s+[\\w-]+: '?(?<currentValue>[^\\s']+)'?"
       ]
     }
+  ],
+  "packageRules": [
+    {
+      "description": "Tool versions in action.yml are tracked by the '# renovate:' comments (customManagers); skip the duplicate github-actions 'uses-with' extraction (e.g. hugo-version of peaceiris/actions-hugo).",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchDepTypes": [
+        "uses-with"
+      ],
+      "enabled": false
+    }
   ]
 }
