@@ -29,7 +29,7 @@ jobs:
     steps:
     - name: Checkout, build and deploy
       id: publish
-      uses: Guite/hugo-action@v4
+      uses: Guite/hugo-action@v5
       with:
         access_token: ${{ secrets.CI_ACCESS_TOKEN }}
 ```
